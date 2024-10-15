@@ -16,7 +16,7 @@ The React Form Component Library provides a set of reusable and customizable for
 
 - [Installation](#installation)
 - [Usage](#usage)
-  - (FormProvider)(#formprovider)
+  - [FormProvider](#formprovider)
   - [InputBox](#inputbox)
   - [RadioButton](#radiobutton)
   - [DropDownButton](#dropdown)
