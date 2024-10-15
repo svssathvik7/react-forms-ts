@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaCircleExclamation, FaRegEye, FaRegEyeSlash } from "react-icons/fa6"; 
 import { useFormContext } from "../hooks/useFormContext";
 import { InputFieldProps } from "../models/Models";
-
+// The InputBox component is a versatile input field that supports various types: text, email, password, textarea, date,file,tel,button
 const InputBox: React.FC<InputFieldProps> = ({
   type,
   required,
@@ -20,22 +20,24 @@ const InputBox: React.FC<InputFieldProps> = ({
   className,
   ...args
 }) => {
+  // required functions from formcontext
   const { hasRegistered, registerField, updateField, fields, handleClick } = useFormContext();
-  
+  // to maintain password show and hide functionality
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   useEffect(() => {
     const hasAlreadyRegistered = hasRegistered(fieldKey);
+    // to avoid duplicate registrations
     if (!hasAlreadyRegistered) {
       registerField(fieldKey, required, value, defaultErrorText, validateFunc, type, placeholder ? placeholder : "");
     }
     setIsPasswordVisible(false);
   }, [fieldKey, value, defaultErrorText, validateFunc, hasRegistered, registerField]);
-
+  // obtain current field to manipulate
   const currentField = fields.find((field) => field.fieldKey === fieldKey);
   const currentValue = currentField ? currentField.value : value; 
   const error = currentField ? currentField.error : undefined;
-
+  // state and error updation
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newValue = e.target.value; 
     updateField(fieldKey, newValue);
@@ -44,7 +46,7 @@ const InputBox: React.FC<InputFieldProps> = ({
   const togglePasswordVisibility = () => {
     setIsPasswordVisible((prev) => !prev);
   };
-
+  // future scope to disable form submission
   const hasErrorInAnyField = fields.some((field) => field.error);
 
   return (

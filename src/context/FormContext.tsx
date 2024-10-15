@@ -2,9 +2,14 @@ import { createContext, ReactNode, useState } from "react";
 import { InputFieldProps, FormSpecificTypes, DropDownFieldProps } from "../models/Models";
 import {useDebounce} from "../hooks/Debouncer";
 
+// type defined in models
 type FormStateType = FormSpecificTypes;
 
+
+// creation of form context
 const FormContext = createContext<FormStateType | null>(null);
+
+// to make input component versatile a small utility that makes InputBox work like checkbox too
 const invertInput = (input:string|number):string=>{
     if(input == "true"){
         return "false";
@@ -14,15 +19,21 @@ const invertInput = (input:string|number):string=>{
     }
 }
 export const FormProvider = ({ children,debounceDelay=300 }: { children: ReactNode,debounceDelay?:number}) => {
+    // debounce delay is an optional
     const [fields, setFields] = useState<(InputFieldProps|DropDownFieldProps)[]>([]);
 
+    // resets all the form fields to empty
     const resetForm = () => {
         setFields([]);
     };
 
+
+    // utilty to check the membership of an input field
     const hasRegistered = (fieldKey: string): boolean => {
         return fields.some(field => field.fieldKey === fieldKey);
     };
+
+    // a function that ( actually is a closure for debouncing ) is called on update with debouncing for error checking/ input validation
     const validateData = useDebounce(
         (fieldIndex:number)=>{
             const fieldToUpdate = fields[fieldIndex];
@@ -39,15 +50,18 @@ export const FormProvider = ({ children,debounceDelay=300 }: { children: ReactNo
             )
         }
     ,debounceDelay);
+
+    // the state updation function, the key idea is update the ui but debounce the validation
     const updateField = (fieldKey: string, newValue: string | number): boolean => {
         const fieldIndex = fields.findIndex(field => field.fieldKey === fieldKey);
+        // check if there exists a field with the given update fieldKey
         if (fieldIndex === -1) {
             console.warn(`Field with fieldKey "${fieldKey}" does not exist.`);
             return false;
         }
 
         const fieldToUpdate = fields[fieldIndex];
-        console.log(fieldKey,newValue);
+        // updating the UI
         setFields(prevFields => {
             const updatedFields = [...prevFields];
 
@@ -58,10 +72,12 @@ export const FormProvider = ({ children,debounceDelay=300 }: { children: ReactNo
 
             return updatedFields;
         });
+        // debounce validator
         validateData(fieldIndex);
         return true;
     };
 
+    // to maintain dynamic context form states, we register each field in the form
     const registerField = (
         fieldKey: string, 
         required: boolean,
@@ -114,6 +130,7 @@ export const FormProvider = ({ children,debounceDelay=300 }: { children: ReactNo
         return true;
     };
 
+    // to let the user have granular control over the states, we provide a getFormState function to return current form state
     const getFormState = (): Record<string, string | number> => {
         const formState: Record<string, string | number> = {};
     

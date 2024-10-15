@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import {useFormContext} from "../hooks/useFormContext";
 import { DropDownFieldProps } from "../models/Models";
+// The DropDown component allows users to select an option from a dropdown list.
 
 const DropDown: React.FC<DropDownFieldProps> = ({
   required,
@@ -14,11 +15,13 @@ const DropDown: React.FC<DropDownFieldProps> = ({
   options,
   type
 }) => {
+  // required functions from formcontext
   const context = useFormContext();
   const { hasRegistered, registerField, updateField, fields } = context;
 
   useEffect(() => {
     const hasAlreadyRegistered = hasRegistered(fieldKey);
+    // avoids duplicate registrations in context state
     if (!hasAlreadyRegistered) {
       console.log(registerField(
         fieldKey,
@@ -34,7 +37,8 @@ const DropDown: React.FC<DropDownFieldProps> = ({
   }, [fieldKey, value, hasRegistered, registerField, options]);
 
   const currentField = fields.find((field) => field.fieldKey === fieldKey);
-
+  // update the state on change
+  
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
     updateField(fieldKey, selectedValue);

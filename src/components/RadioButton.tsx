@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useFormContext } from "../hooks/useFormContext";
 import { CommonFieldProps } from "../models/Models";
+// The RadioButton component allows users to select one option from a list of choices.
 
+// options act as the dropdown list
 interface RadioButtonProps extends CommonFieldProps {
     options: string[]; 
 }
@@ -21,10 +23,13 @@ const RadioButton: React.FC<RadioButtonProps> = ({
     validateFunc,
     className = "",
 }) => {
+    // required functions from formcontext
+
     const context = useFormContext();
     const { hasRegistered, registerField, updateField, fields } = context;
 
     useEffect(() => {
+        // avoid dup registration
         const hasAlreadyRegistered = hasRegistered(fieldKey);
         if (!hasAlreadyRegistered) {
             registerField(
