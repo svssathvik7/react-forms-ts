@@ -39,15 +39,15 @@ or
 yarn add react-forms-ts
 ```
 
-## Usage
-The `FormProvider` component wraps your form and manages the form state and validation logic across all child components. It ensures that validation functions and form states are accessible and consistent throughout the form.  
-
+## Usage  
 ### Import styling
 To use the `react-forms-ts` package, make sure to import the styles in your project. Add the following line in your main application file or wherever you use the components:
 ```javascript
 import 'react-forms-ts/dist/styles.css';
 ```
 ### FormProvider
+The `FormProvider` component wraps your form and manages the form state and validation logic across all child components. It ensures that validation functions and form states are accessible and consistent throughout the form.  
+
 ```jsx
 <FormProvider>
   <InputBox/>
