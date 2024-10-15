@@ -20,6 +20,7 @@ The React Form Component Library provides a set of reusable and customizable for
   - [InputBox](#inputbox)
   - [RadioButton](#radiobutton)
   - [DropDownButton](#dropdown)
+  - [Button](#button)
 - [Props](#props)
   - [InputBox Props](#inputbox-props)
   - [RadioButton Props](#radiobutton-props)
@@ -142,6 +143,28 @@ const App = () => {
 export default App;
 ```
 ![Email Output](./src/assets/output3.png)
+
+### Button
+
+The `Button` component allows users to handle or induce on click events in the form
+#### Example
+
+```jsx
+import { FormProvider, InputBox} from "react-forms-ts";
+import "react-forms-ts/dist/styles.css";
+
+const App = () => {
+  return (
+      <FormProvider>
+        <InputBox fieldKey='btn' required={true} placeholder='' value={"Click me"} validateFunc={()=>{}} defaultErrorText='' type='button' bgColor="#A020F0" height="3rem" color="white"/>
+      </FormProvider>
+  );
+};
+
+export default App;
+```
+![Button Output](./src/assets/output5.png)
+
 
 ## Props
 
