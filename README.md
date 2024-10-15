@@ -134,12 +134,14 @@ const App = () => {
 };
 
 export default App;
+```
 ![Email Output](./src/assets/output3.png)
 
 ## Props
 
 ### InputBox Props
 
+  
 | Prop              | Type                      | Description                                                        |
 |-------------------|---------------------------|--------------------------------------------------------------------|
 | `type`            | `string`                  | Type of input (e.g., `text`, `email`, `password`, `textarea`, `file`, `tel`, `button`, `date`). |
@@ -154,9 +156,9 @@ export default App;
 | `className`       | `string`                  | Additional CSS classes for customization.                         |
 | `value`           | `string`                  | Initial value of the input (applicable for text types).          |
 | `onClick`         | `function`                | Function to call on button click (applicable for button type).   |
-
-### RadioButton Props
-
+    
+### RadioButton Props and DropDown Props  
+  
 | Prop              | Type                      | Description                                                        |
 |-------------------|---------------------------|--------------------------------------------------------------------|
 | `options`         | `string[]`                | Array of options for the radio buttons.                          |
@@ -169,3 +171,9 @@ export default App;
 | `font`            | `string`                  | Font family for the radio button labels.                          |
 | `className`       | `string`                  | Additional CSS classes for customization.                         |
 
+
+### Form Props
+
+| Prop              | Type                      | Description                                                        |
+|-------------------|---------------------------|--------------------------------------------------------------------|
+| `debounceDelay`         | `number`                |  Adjusts the custom debounce delay                          |                  |
