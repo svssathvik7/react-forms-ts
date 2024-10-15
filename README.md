@@ -5,6 +5,7 @@
 The React Form Component Library provides a set of reusable and customizable form components designed to simplify form handling in React applications. The library includes several `input` components, which are flexible and easy to integrate into any project.
 
 ![Sample Output](./src/assets/output4.png)
+![Error Output](./src/assets/error-output.png)
 ## Features
 
 - Supports multiple input types including text, email, password, file uploads, date, telephone, and buttons.
@@ -24,7 +25,7 @@ The React Form Component Library provides a set of reusable and customizable for
 - [Props](#props)
   - [InputBox Props](#inputbox-props)
   - [RadioButton Props](#radiobutton-props)
-- [License](#license)
+- [Customizations](#customization)
 
 ## Installation
 
@@ -71,8 +72,7 @@ The `InputBox` component is a versatile input field that supports various types:
 #### Example
 
 ```jsx
-import InputBox from 'react-forms-ts';
-import RadioButton from 'react-forms-ts';
+import {InputBox} from 'react-forms-ts';
 import { FormProvider } from 'react-forms-ts';
 
 const App = () => {
@@ -96,10 +96,9 @@ The `RadioButton` component allows users to select one option from a list of cho
 #### Example
 
 ```jsx
-import './App.css';
-import InputBox from './components/InputBox';
-import RadioButton from './components/RadioButton';
-import { FormProvider } from './context/FormContext';
+import {InputBox} from 'react-forms-ts';
+import {RadioButton} from 'react-forms-ts';
+import { FormProvider } from 'react-forms-ts';
 
 const App = () => {
   return (
@@ -119,7 +118,7 @@ The `DropDown` component allows users to select an option from a dropdown list.
 #### Example
 
 ```jsx
-import DropDown from 'react-forms-ts';
+import {DropDown} from 'react-forms-ts';
 import { FormProvider } from 'react-forms-ts';
 
 const App = () => {
@@ -206,3 +205,26 @@ export default App;
 | Prop              | Type                      | Description                                                        |
 |-------------------|---------------------------|--------------------------------------------------------------------|
 | `debounceDelay`         | `number`                |  Adjusts the custom debounce delay                          |                  |
+
+### Customization
+
+The `react-forms-ts` package is designed to be smart enough to accept native arguments that work on standard HTML input elements. This means you can pass additional props to customize your input fields according to your needs.
+
+For example, you can add class names, htmls arguments, set placeholder text, define input types, and more to achieve greater flexibility in your UI. Here’s a quick example:
+
+```jsx
+import {InputBox} from 'react-forms-ts';
+import { FormProvider } from 'react-forms-ts';
+
+const App = () => {
+  const emailValidity = (data:string)=>{
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(data);
+  }
+  return (
+      <FormProvider>
+        <InputBox fieldKey='email' required={true} placeholder='Enter email' value={""} validateFunc={emailValidity} defaultErrorText='enter valid email' type='email' aria-label={"This is input field"}/>
+      </FormProvider>
+  );
+};
+```
