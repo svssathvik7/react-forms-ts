@@ -220,6 +220,7 @@ export default App;
 | `className`       | `string`                  | Additional CSS classes for customization.                         |
 | `value`           | `string`                  | Initial value of the input (applicable for text types).          |
 | `onClick`         | `function`                | Function to call on button click (applicable for button type).   |
+| `className`       | `string`                  | Additional CSS classes for customization.   |
     
 ### RadioButton Props and DropDown Props  
   
@@ -264,3 +265,5 @@ const App = () => {
   );
 };
 ```
+
+`Note:` Add a simple true returning function as validateFunc to InputBox if validation is not your requirement and some safe text as defaultErrorText

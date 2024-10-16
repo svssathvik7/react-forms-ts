@@ -1,9 +1,10 @@
 {
   "name": "react-forms-ts",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "The React Form Component Library provides a set of reusable and customizable form components designed to simplify form handling in React applications. The library includes several `input` components, which are flexible and easy to integrate into any project.",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
+  "repository": "https://github.com/svssathvik7/react-forms-ts",
   "scripts": {
     "build:css": "postcss src/styles/tailwind.css -o dist/styles.css",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,7 +12,9 @@
   },
   "keywords": [
     "React",
-    "ts"
+    "ts",
+    "validation",
+    "form widget"
   ],
   "author": "sathvik svs",
   "license": "ISC",
