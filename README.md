@@ -4,8 +4,44 @@
 
 The React Form Component Library provides a set of reusable and customizable form components designed to simplify form handling in React applications. The library includes several `input` components, which are flexible and easy to integrate into any project.
 
+```jsx
+import {DropDown} from "react-forms-ts";
+import { FormProvider } from "./context/FormContext";
+import {InputBox} from "react-forms-ts";
+import {RadioButton} from "react-forms-ts";
+
+const App = () => {
+  const emailValidity = (data:string)=>{
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(data);
+  }
+  return (
+      <FormProvider>
+        <input type="text" minLength={50}/>
+        <InputBox fieldKey='email' required={true} placeholder='Enter email' value={""} validateFunc={emailValidity} defaultErrorText='enter valid email' type='email' minLength={50}/>
+        <InputBox fieldKey='dob' required={true} placeholder='enter date' value={""} validateFunc={()=>{return true;}} defaultErrorText='enter valid date' type='date'/>
+        <DropDown 
+          fieldKey='country' 
+          required={true} 
+          options={["India", "USA", "Canada"]} 
+          value={""} 
+          width="200px" 
+          height="40px" 
+          color="black" 
+          bgColor="transparent" 
+          font="Arial" 
+        />
+        <InputBox fieldKey='password' required={true} placeholder='enter passoword' value={""} validateFunc={()=>{return true;}} defaultErrorText='enter valid password' type='password'/>
+        <RadioButton fieldKey='gender' required={true} options={["Male","Female"]} value={""}/>
+        <InputBox fieldKey='btn' required={true} placeholder='something' value={"Click me"} validateFunc={emailValidity} defaultErrorText='enter valid dob' type='button' bgColor="#A020F0" height="3rem" color="white" onClick={undefined}/>
+      </FormProvider>
+  );
+};
+
+export default App;
+```
 ![Sample Output](./src/assets/output4.png)
-![Error Output](./src/assets/error-output.png)
+![Error Output](./src/assets/output6.png)
 ## Features
 
 - Supports multiple input types including text, email, password, file uploads, date, telephone, and buttons.

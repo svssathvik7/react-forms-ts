@@ -88,15 +88,7 @@ export const FormProvider = ({ children,debounceDelay=300 }: { children: ReactNo
         placeholder?: string,
         options?:string[],
     ): boolean => {
-        console.log(fieldKey, 
-            required,
-            value, 
-            defaultErrorText, 
-            validateFunc,
-            type,
-            placeholder,
-            options)
-        if(type!==undefined && defaultErrorText && placeholder && validateFunc){
+        if(type!==undefined && defaultErrorText!==undefined && placeholder!=undefined && validateFunc){
             const fieldExists = hasRegistered(fieldKey);
             if (fieldExists) {
                 console.warn(`Field with fieldKey "${fieldKey}" already exists.`);
@@ -136,7 +128,6 @@ export const FormProvider = ({ children,debounceDelay=300 }: { children: ReactNo
     
         fields.forEach(field => {
             formState[field.fieldKey] = field.value;
-            console.log(formState);
         });
     
         return formState;
@@ -145,7 +136,6 @@ export const FormProvider = ({ children,debounceDelay=300 }: { children: ReactNo
     const handleClick:Function = (cb:Function)=>{
         const data = getFormState();
         const response = cb ? cb(data) : data;
-        console.log(response);
         resetForm();
         return response;
     }
