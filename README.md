@@ -49,6 +49,8 @@ const App = () => {
 
 export default App;
 ```
+## `Sample deployment link` - https://react-forms-ts-deployment.onrender.com/
+
 <img src="./src/assets/output4.png" alt="erraneous form" width="200" height="auto">
 <img src="./src/assets/output6.png" alt="erraneous form" width="200" height="auto">  
 
@@ -280,6 +282,9 @@ const App = () => {
 ```
 
 ### Versions
+
+- **1.2.2**:
+  - `Update` Added a sample deployment link.
 
 - **1.2.0**:
   - `New Feature` Added major customizations for checkbox.
