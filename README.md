@@ -6,9 +6,10 @@ The React Form Component Library provides a set of reusable and customizable for
 
 ```jsx
 import {DropDown} from "react-forms-ts";
-import { FormProvider } from "./context/FormContext";
+import { FormProvider } from "react-forms-ts";
 import {InputBox} from "react-forms-ts";
 import {RadioButton} from "react-forms-ts";
+import "react-forms-ts/dist/styles.css"
 
 const App = () => {
   const emailValidity = (data:string)=>{
@@ -47,6 +48,8 @@ export default App;
 - Customizable styles through props and class names.
 - Integration of custom validation logic.
 - Easy to use with hooks for managing form state.
+- Micro-animations, animated error UI
+- Integrated Debouncer with custom debounce delay
 
 ## Table of Contents
 

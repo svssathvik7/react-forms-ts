@@ -55,6 +55,7 @@ export const FormProvider = ({ children,debounceDelay=300,submitFunc }: { childr
     const updateField = (fieldKey: string, newValue: string | number): boolean => {
         const fieldIndex = fields.findIndex(field => field.fieldKey === fieldKey);
         // check if there exists a field with the given update fieldKey
+        console.log(fieldKey,newValue);
         if (fieldIndex === -1) {
             console.warn(`Field with fieldKey "${fieldKey}" does not exist.`);
             return false;
@@ -72,6 +73,7 @@ export const FormProvider = ({ children,debounceDelay=300,submitFunc }: { childr
 
             return updatedFields;
         });
+        if(fieldToUpdate.type!=="checkbox" && fieldToUpdate.type!=="" && fieldToUpdate.type!==undefined)
         // debounce validator
         validateData(fieldIndex);
         return true;
@@ -141,7 +143,7 @@ export const FormProvider = ({ children,debounceDelay=300,submitFunc }: { childr
     }
     const handleSubmit = async(e: React.FormEvent) => {
         e.preventDefault();
-        const anyRequiredPending = fields.some(field => field.required && !field.value);
+        const anyRequiredPending = fields.some(field => field.required && (!field.value || field.value === ""));
         if(anyRequiredPending){
             return alert("Fill required fields");
         }
