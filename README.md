@@ -41,15 +41,17 @@ const App = () => {
         />
         <RadioButton fieldKey='gender' required={true} options={["Male","Female"]} value={""}/>
         <InputBox fieldKey='feedback' required={true} placeholder='Enter work expeirence' value={""} validateFunc={feedbackValidity} defaultErrorText='Write within 10 letters' type='textarea' cols={26}/>
-        <InputBox fieldKey='submit' required={true} placeholder='something' value={"Click me"} validateFunc={()=>{return true;}} defaultErrorText='enter valid dob' type='submit' width="10rem" bgColor="#A020F0" height="3rem" color="white"/>
+        <InputBox fieldKey='rating' required={true} placeholder='Welcome to newsletter' value={"Subscibe to Newsletter"} validateFunc={feedbackValidity} defaultErrorText='' type='checkbox'/>
+        <InputBox fieldKey='submit' required={true} placeholder='something' value={"Click me"} validateFunc={()=>{return true;}} defaultErrorText='enter valid dob' type='submit' bgColor="#A020F0" height="3rem" color="white"/>
       </FormProvider>
   );
 };
 
 export default App;
 ```
-![Sample Output](./src/assets/output4.png)
-![Error Output](./src/assets/output6.png)
+<img src="./src/assets/output4.png" alt="erraneous form" width="200" height="auto">
+<img src="./src/assets/output6.png" alt="erraneous form" width="200" height="auto">  
+
 ## Features
 
 - Supports multiple input types including text, email, password, file uploads, date, telephone, and buttons.
