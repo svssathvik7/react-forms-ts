@@ -279,7 +279,7 @@ const App = () => {
 };
 ```
 
-### What's New in 1.1.*
+### Versions
 
 - **1.2.0**:
   - `New Feature` Added major customizations for checkbox.
