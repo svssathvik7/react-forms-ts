@@ -72,6 +72,7 @@ export default App;
   - [InputBox Props](#inputbox-props)
   - [RadioButton Props](#radiobutton-props)
 - [Customizations](#customization)
+- [Version Chronicle](#versions)
 
 ## Installation
 
@@ -275,3 +276,21 @@ const App = () => {
   );
 };
 ```
+
+### What's New in 1.1.*
+
+- **1.2.0**:
+  - `New Feature` Added major customizations for checkbox.
+  - `Improvement` Default label support for checkbox.
+
+- **1.1.3**:
+  - `Improvement` Removed unwanted validation controller from updation pipeline.
+
+- **1.1.2**:
+  - `Improvement` Fixed dropdown error validation check.
+  
+- **1.1.1**:
+  - `Improvement` Fixed form submission control.
+
+- **1.1.0**:
+  - `Initial Release` Version 1.1 with major UI and form validation improvements.
