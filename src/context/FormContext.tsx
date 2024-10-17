@@ -55,7 +55,6 @@ export const FormProvider = ({ children,debounceDelay=300,submitFunc,className }
     const updateField = (fieldKey: string, newValue: string | number): boolean => {
         const fieldIndex = fields.findIndex(field => field.fieldKey === fieldKey);
         // check if there exists a field with the given update fieldKey
-        console.log(fieldKey,newValue);
         if (fieldIndex === -1) {
             console.warn(`Field with fieldKey "${fieldKey}" does not exist.`);
             return false;
@@ -73,7 +72,7 @@ export const FormProvider = ({ children,debounceDelay=300,submitFunc,className }
 
             return updatedFields;
         });
-        console.log(fieldToUpdate)
+        // checkboxes and dropdowns usually have no significance of debouncing and validation
         if(fieldToUpdate.type!=="checkbox" && fieldToUpdate.type!=="" && fieldToUpdate.type!==undefined){
             // debounce validator
             validateData(fieldIndex);
@@ -137,23 +136,26 @@ export const FormProvider = ({ children,debounceDelay=300,submitFunc,className }
         return JSON.stringify(formState);
     };    
 
-    const handleClick:Function = (cb:Function)=>{
-        const data = getFormState();
-        const response = cb ? cb(data) : data;
-        resetForm();
-        return response;
+    const handleClick:Function = async(cb:Function)=>{
+        // execute the callback and return result on success or log the error
+        try {
+            const res = await cb();
+            return res;
+        } catch (error) {
+            console.log("Failed for onclick : ",error);
+        }
     }
     const handleSubmit = async(e: React.FormEvent) => {
+        // prevent implicit form clearing
         e.preventDefault();
-        const anyRequiredPending = fields.some(field => field.required && (!field.value || field.value === ""));
-        if(anyRequiredPending){
-            return alert("Fill required fields");
-        }
         const data = getFormState();
-        console.log(data);
-        const response = await submitFunc(data);
-        resetForm();
-        return response;
+        try {
+            const response = await submitFunc(data);
+            resetForm();
+            return response;
+        } catch (error) {
+            return console.log("Form failed at submission : ",error);
+        }
     };
     return (
         <FormContext.Provider value={{ fields, resetForm, registerField, updateField, hasRegistered, getFormState, handleClick, submitFunc, handleSubmit}}>
