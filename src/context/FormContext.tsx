@@ -18,7 +18,7 @@ const invertInput = (input:string|number):string=>{
         return "true";
     }
 }
-export const FormProvider = ({ children,debounceDelay=300,submitFunc }: { children: ReactNode,debounceDelay?:number,submitFunc:Function}) => {
+export const FormProvider = ({ children,debounceDelay=300,submitFunc,className }: { children: ReactNode,debounceDelay?:number,submitFunc:Function, className?:string}) => {
     // debounce delay is an optional
     const [fields, setFields] = useState<(InputFieldProps|DropDownFieldProps)[]>([]);
 
@@ -73,9 +73,11 @@ export const FormProvider = ({ children,debounceDelay=300,submitFunc }: { childr
 
             return updatedFields;
         });
-        if(fieldToUpdate.type!=="checkbox" && fieldToUpdate.type!=="" && fieldToUpdate.type!==undefined)
-        // debounce validator
-        validateData(fieldIndex);
+        console.log(fieldToUpdate)
+        if(fieldToUpdate.type!=="checkbox" && fieldToUpdate.type!=="" && fieldToUpdate.type!==undefined){
+            // debounce validator
+            validateData(fieldIndex);
+        }
         return true;
     };
 
@@ -155,7 +157,7 @@ export const FormProvider = ({ children,debounceDelay=300,submitFunc }: { childr
     };
     return (
         <FormContext.Provider value={{ fields, resetForm, registerField, updateField, hasRegistered, getFormState, handleClick, submitFunc, handleSubmit}}>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={className || " w-fit "}>
                 {children}
             </form>
         </FormContext.Provider>

@@ -16,10 +16,18 @@ const App = () => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(data);
   }
+  const feedbackValidity = (data:string)=> data.length <= 10;
+  const passowordValidity = (data:String) => data.length > 4;
+  const dateValidity = (data:string)=>{
+    const regex = /^(\d{4})-(\d{2})-(\d{2})$/;
+    console.log(data.match(regex))
+    return data.match(regex) ? true : false;
+  }
   return (
       <FormProvider submitFunc={(data:string)=>{alert(data)}}>
         <InputBox fieldKey='email' required={true} placeholder='Enter email' value={""} validateFunc={emailValidity} defaultErrorText='enter valid email' type='email' minLength={5}/>
-        <InputBox fieldKey='dob' required={true} placeholder='enter date' value={""} validateFunc={()=>{return true;}} defaultErrorText='enter valid date' type='date'/>
+        <InputBox fieldKey='password' required={true} placeholder='enter passoword' value={""} validateFunc={passowordValidity} defaultErrorText='password must have atleast 5 characters' type='password'/>
+        <InputBox fieldKey='dob' required={true} placeholder='enter date' value={""} validateFunc={dateValidity} defaultErrorText='enter valid date' type='date'/>
         <DropDown 
           fieldKey='country' 
           required={true} 
@@ -31,9 +39,9 @@ const App = () => {
           bgColor="transparent" 
           font="Arial" 
         />
-        <InputBox fieldKey='password' required={true} placeholder='enter passoword' value={""} validateFunc={()=>{return true;}} defaultErrorText='enter valid password' type='password'/>
         <RadioButton fieldKey='gender' required={true} options={["Male","Female"]} value={""}/>
-        <InputBox fieldKey='submit' required={false} placeholder='something' value={"Click me"} validateFunc={()=>{return true;}} defaultErrorText='enter valid dob' type='submit' bgColor="#A020F0" height="3rem" color="white"/>
+        <InputBox fieldKey='feedback' required={true} placeholder='Enter work expeirence' value={""} validateFunc={feedbackValidity} defaultErrorText='Write within 10 letters' type='textarea' cols={26}/>
+        <InputBox fieldKey='submit' required={true} placeholder='something' value={"Click me"} validateFunc={()=>{return true;}} defaultErrorText='enter valid dob' type='submit' width="10rem" bgColor="#A020F0" height="3rem" color="white"/>
       </FormProvider>
   );
 };
@@ -112,7 +120,6 @@ The `InputBox` component is a versatile input field that supports various types:
 ```jsx
 import {InputBox} from 'react-forms-ts';
 import { FormProvider } from 'react-forms-ts';
-import "react-forms-ts/dist/styles.css"
 
 const App = () => {
   const emailValidity = (data:string)=>{
@@ -138,7 +145,6 @@ The `RadioButton` component allows users to select one option from a list of cho
 import {InputBox} from 'react-forms-ts';
 import {RadioButton} from 'react-forms-ts';
 import { FormProvider } from 'react-forms-ts';
-import "react-forms-ts/dist/styles.css"
 
 const App = () => {
   return (
@@ -160,7 +166,6 @@ The `DropDown` component allows users to select an option from a dropdown list.
 ```jsx
 import {DropDown} from 'react-forms-ts';
 import { FormProvider } from 'react-forms-ts';
-import "react-forms-ts/dist/styles.css"
 
 const App = () => {
   return (
@@ -257,7 +262,6 @@ For example, you can add class names, htmls arguments, set placeholder text, def
 ```jsx
 import {InputBox} from 'react-forms-ts';
 import { FormProvider } from 'react-forms-ts';
-import "react-forms-ts/dist/styles.css"
 
 const App = () => {
   const emailValidity = (data:string)=>{
@@ -266,7 +270,7 @@ const App = () => {
   }
   return (
       <FormProvider>
-        <InputBox fieldKey='email' required={true} placeholder='Enter email' value={""} validateFunc={emailValidity} defaultErrorText='enter valid email' type='email' aria-label={"This is input field"} className="my-custom-class"/>
+        <InputBox fieldKey='email' required={true} placeholder='Enter email' value={""} validateFunc={emailValidity} defaultErrorText='enter valid email' type='email' aria-label={"This is input field"}/>
       </FormProvider>
   );
 };

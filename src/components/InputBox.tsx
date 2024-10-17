@@ -58,7 +58,7 @@ const InputBox: React.FC<InputFieldProps> = ({
   const hasErrorInAnyField = fields.some(field => field.error);
   // Render error message if the field has an error
   const renderError = () => (
-    <p className={`absolute left-0 m-2 flex items-center text-red-600 text-[8px] transition-all ${error ? "opacity-100 bottom-0" : "opacity-0 bottom-2"}`}>
+    <p className={`absolute left-0 m-2 flex items-center text-red-600 text-[8px] transition-all duration-300 ${error ? "opacity-100 bottom-0" : "opacity-0 bottom-1"}`}>
       <FaCircleExclamation className="mx-1" />
       {error}
     </p>
