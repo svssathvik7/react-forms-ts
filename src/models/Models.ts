@@ -26,7 +26,7 @@ export type DropDownFieldProps = CommonFieldProps & {
 };
 
 export type FormSpecificTypes = {
-    getFormState: () => Record<string, any>; // Improved type safety
+    getFormState: () => string; // Improved type safety
     hasRegistered: (fieldKey: string) => boolean;
     registerField: (
         fieldKey: string,
@@ -44,4 +44,6 @@ export type FormSpecificTypes = {
     handleClick: Function; 
     debouncerDelay?: number;
     className?: string;
+    submitFunc:Function;
+    handleSubmit:Function;
 };

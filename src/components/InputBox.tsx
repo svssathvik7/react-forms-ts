@@ -22,7 +22,7 @@ const InputBox: React.FC<InputFieldProps> = ({
   ...args
 }) => {
   // Get required functions from form context
-  const { hasRegistered, registerField, updateField, fields, handleClick } = useFormContext();
+  const { hasRegistered, registerField, updateField, fields, handleClick, handleSubmit } = useFormContext();
 
   // State to toggle password visibility
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -56,7 +56,6 @@ const InputBox: React.FC<InputFieldProps> = ({
 
   // Check if any field has an error to control form submission
   const hasErrorInAnyField = fields.some(field => field.error);
-
   // Render error message if the field has an error
   const renderError = () => (
     <p className={`absolute left-0 m-2 flex items-center text-red-600 text-[8px] transition-all ${error ? "opacity-100 bottom-0" : "opacity-0 bottom-2"}`}>
@@ -90,12 +89,17 @@ const InputBox: React.FC<InputFieldProps> = ({
           type={type === "password" ? (!isPasswordVisible ? "password" : "text") : type}
           required={required}
           placeholder={placeholder}
-          className={`focus:shadow-md ease-in transition-all border rounded-md px-3 py-3 outline-none m-1 ${type === "button" ? "hover:shadow-slate-500 cursor-pointer flex items-center justify-center" : error ? 'border-red-500 ' : currentValue!=="" ? 'border-green-500' : ''} ${hasErrorInAnyField && type === "button" ? " pointer-events-none opacity-40 " : ""} ${className || ""}`}
+          className={`focus:shadow-md ease-in transition-all border rounded-md px-3 py-3 outline-none m-1 ${(type === "button" || type=== "submit") ? "hover:shadow-slate-500 cursor-pointer flex items-center justify-center" : error ? 'border-red-500 ' : currentValue!=="" ? 'border-green-500' : ''} ${hasErrorInAnyField && (type === "button" || type === "submit")? " pointer-events-none opacity-40 " : ""} ${className || ""}`}
           style={{ backgroundColor: bgColor || "inherit", color: color || "inherit", width: width || "20dvw", height: height || "fit-content", fontSize: "inherit", fontFamily: font || "inherit" }}
           onChange={handleInputChange}
           value={currentValue}
           {...args}
-          onClick={(e) => { e.preventDefault(); onClick && handleClick(onClick); }}
+          onClick={(e) => { 
+            // e.preventDefault(); 
+            if (onClick) {
+              type === "submit" ? handleSubmit(onClick) : handleClick(onClick);
+            }
+          }}
           disabled={type === "button" && hasErrorInAnyField}
         />
       )}

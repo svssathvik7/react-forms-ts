@@ -16,9 +16,8 @@ const App = () => {
     return emailRegex.test(data);
   }
   return (
-      <FormProvider>
-        <input type="text" minLength={50}/>
-        <InputBox fieldKey='email' required={true} placeholder='Enter email' value={""} validateFunc={emailValidity} defaultErrorText='enter valid email' type='email' minLength={50}/>
+      <FormProvider submitFunc={(data:string)=>{alert(data)}}>
+        <InputBox fieldKey='email' required={true} placeholder='Enter email' value={""} validateFunc={emailValidity} defaultErrorText='enter valid email' type='email' minLength={5}/>
         <InputBox fieldKey='dob' required={true} placeholder='enter date' value={""} validateFunc={()=>{return true;}} defaultErrorText='enter valid date' type='date'/>
         <DropDown 
           fieldKey='country' 
@@ -33,7 +32,7 @@ const App = () => {
         />
         <InputBox fieldKey='password' required={true} placeholder='enter passoword' value={""} validateFunc={()=>{return true;}} defaultErrorText='enter valid password' type='password'/>
         <RadioButton fieldKey='gender' required={true} options={["Male","Female"]} value={""}/>
-        <InputBox fieldKey='btn' required={true} placeholder='something' value={"Click me"} validateFunc={emailValidity} defaultErrorText='enter valid dob' type='button' bgColor="#A020F0" height="3rem" color="white" onClick={undefined}/>
+        <InputBox fieldKey='submit' required={false} placeholder='something' value={"Click me"} validateFunc={()=>{return true;}} defaultErrorText='enter valid dob' type='submit' bgColor="#A020F0" height="3rem" color="white"/>
       </FormProvider>
   );
 };
@@ -220,7 +219,6 @@ export default App;
 | `className`       | `string`                  | Additional CSS classes for customization.                         |
 | `value`           | `string`                  | Initial value of the input (applicable for text types).          |
 | `onClick`         | `function`                | Function to call on button click (applicable for button type).   |
-| `className`       | `string`                  | Additional CSS classes for customization.   |
     
 ### RadioButton Props and DropDown Props  
   
@@ -242,6 +240,7 @@ export default App;
 | Prop              | Type                      | Description                                                        |
 |-------------------|---------------------------|--------------------------------------------------------------------|
 | `debounceDelay`         | `number`                |  Adjusts the custom debounce delay                          |                  |
+| `submitFunc`         | `function`                |  Fired on submission of the form                          |                  |
 
 ### Customization
 
@@ -265,5 +264,3 @@ const App = () => {
   );
 };
 ```
-
-`Note:` Add a simple true returning function as validateFunc to InputBox if validation is not your requirement and some safe text as defaultErrorText

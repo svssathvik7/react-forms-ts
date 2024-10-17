@@ -18,7 +18,7 @@ const invertInput = (input:string|number):string=>{
         return "true";
     }
 }
-export const FormProvider = ({ children,debounceDelay=300 }: { children: ReactNode,debounceDelay?:number}) => {
+export const FormProvider = ({ children,debounceDelay=300,submitFunc }: { children: ReactNode,debounceDelay?:number,submitFunc:Function}) => {
     // debounce delay is an optional
     const [fields, setFields] = useState<(InputFieldProps|DropDownFieldProps)[]>([]);
 
@@ -123,14 +123,14 @@ export const FormProvider = ({ children,debounceDelay=300 }: { children: ReactNo
     };
 
     // to let the user have granular control over the states, we provide a getFormState function to return current form state
-    const getFormState = (): Record<string, string | number> => {
+    const getFormState = (): string => {
         const formState: Record<string, string | number> = {};
     
         fields.forEach(field => {
             formState[field.fieldKey] = field.value;
         });
     
-        return formState;
+        return JSON.stringify(formState);
     };    
 
     const handleClick:Function = (cb:Function)=>{
@@ -139,9 +139,23 @@ export const FormProvider = ({ children,debounceDelay=300 }: { children: ReactNo
         resetForm();
         return response;
     }
+    const handleSubmit = async(e: React.FormEvent) => {
+        e.preventDefault();
+        const anyRequiredPending = fields.some(field => field.required && !field.value);
+        if(anyRequiredPending){
+            return alert("Fill required fields");
+        }
+        const data = getFormState();
+        console.log(data);
+        const response = await submitFunc(data);
+        resetForm();
+        return response;
+    };
     return (
-        <FormContext.Provider value={{ fields, resetForm, registerField, updateField, hasRegistered, getFormState, handleClick}}>
-            {children}
+        <FormContext.Provider value={{ fields, resetForm, registerField, updateField, hasRegistered, getFormState, handleClick, submitFunc, handleSubmit}}>
+            <form onSubmit={handleSubmit}>
+                {children}
+            </form>
         </FormContext.Provider>
     );
 };
