@@ -106,7 +106,7 @@ const InputBox: React.FC<InputFieldProps> = ({
           type={type === "password" ? (!isPasswordVisible ? "password" : "text") : type}
           required={required}
           placeholder={placeholder}
-          className={`focus:shadow-md ease-in transition-all border rounded-md px-3 py-3 outline-none m-1 ${(type === "button" || type === "submit") ? "hover:shadow-slate-500 cursor-pointer flex items-center justify-center" : error ? 'border-red-500 ' : currentValue !== "" ? 'border-green-500' : ''} ${hasErrorInAnyField && (type === "button" || type === "submit") ? " pointer-events-none opacity-40 " : ""} ${className || ""}`}
+          className={`focus:shadow-md ease-in transition-all border rounded-md px-3 py-3 outline-none m-1 ${(type === "button" || type === "submit") ? "hover:shadow-slate-500 cursor-pointer flex items-center justify-center" : error ? 'border-red-500 shadow-sm shadow-red-500 ' : currentValue !== "" ? 'border-green-500' : ''} ${hasErrorInAnyField && (type === "button" || type === "submit") ? " pointer-events-none opacity-40 " : ""} ${className || ""}`}
           style={{ backgroundColor: bgColor || "inherit", color: color || "inherit", width: width || "20dvw", height: height || "fit-content", fontSize: "inherit", fontFamily: font || "inherit" }}
           onChange={handleInputChange}
           value={currentValue}
