@@ -283,6 +283,9 @@ const App = () => {
 
 ### Versions
 
+- **1.2.4**:
+  - `New feature` Introducing micro-animations.
+
 - **1.2.2**:
   - `Update` Added a sample deployment link.
 
