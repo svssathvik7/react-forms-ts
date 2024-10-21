@@ -94,7 +94,7 @@ const InputBox: React.FC<InputFieldProps> = ({
         <textarea
           required={required}
           placeholder={placeholder}
-          className={`focus:shadow-sm transition-all border rounded-md p-3 outline-none m-1 ${error ? 'border-red-500' : currentValue !== "" ? 'border-green-500' : ''} ${className || ""}`}
+          className={`focus:shadow-sm transition-all border rounded-md p-3 outline-none m-1 ${error ? 'border-red-500 errortext ' : currentValue !== "" ? 'border-green-500' : ''} ${className || ""}`}
           style={{ backgroundColor: bgColor || "inherit", color: color || "inherit", fontSize: "inherit", fontFamily: font || "inherit" }}
           onChange={handleInputChange}
           value={currentValue}
